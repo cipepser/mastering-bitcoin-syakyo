@@ -5,7 +5,7 @@
 2018/04/13時点で安定バージョンの以下を使う。`git tag`で`rc`がないものが安定バージョン。
 
 ```sh
-❯ git checkout v0.14.2
+❯ git checkout v0.16.0
 ```
 
 セットアップ
@@ -35,12 +35,8 @@ glibtoolize: copying file 'build-aux/m4/ltsugar.m4'
 glibtoolize: copying file 'build-aux/m4/ltversion.m4'
 glibtoolize: copying file 'build-aux/m4/lt~obsolete.m4'
 configure.ac:45: installing 'build-aux/compile'
-configure.ac:45: installing 'build-aux/config.guess'
-configure.ac:45: installing 'build-aux/config.sub'
-configure.ac:28: installing 'build-aux/install-sh'
 configure.ac:28: installing 'build-aux/missing'
 Makefile.am: installing 'build-aux/depcomp'
-parallel-tests: installing 'build-aux/test-driver'
 glibtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, 'build-aux'.
 glibtoolize: copying file 'build-aux/ltmain.sh'
 glibtoolize: putting macros in AC_CONFIG_MACRO_DIRS, 'build-aux/m4'.
@@ -50,12 +46,8 @@ glibtoolize: copying file 'build-aux/m4/ltsugar.m4'
 glibtoolize: copying file 'build-aux/m4/ltversion.m4'
 glibtoolize: copying file 'build-aux/m4/lt~obsolete.m4'
 configure.ac:10: installing 'build-aux/compile'
-configure.ac:5: installing 'build-aux/config.guess'
-configure.ac:5: installing 'build-aux/config.sub'
-configure.ac:9: installing 'build-aux/install-sh'
 configure.ac:9: installing 'build-aux/missing'
 Makefile.am: installing 'build-aux/depcomp'
-parallel-tests: installing 'build-aux/test-driver'
 glibtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, 'build-aux'.
 glibtoolize: copying file 'build-aux/ltmain.sh'
 glibtoolize: putting macros in AC_CONFIG_MACRO_DIRS, 'build-aux/m4'.
@@ -64,17 +56,9 @@ glibtoolize: copying file 'build-aux/m4/ltoptions.m4'
 glibtoolize: copying file 'build-aux/m4/ltsugar.m4'
 glibtoolize: copying file 'build-aux/m4/ltversion.m4'
 glibtoolize: copying file 'build-aux/m4/lt~obsolete.m4'
-configure.ac:72: installing 'build-aux/compile'
-configure.ac:22: installing 'build-aux/config.guess'
-configure.ac:22: installing 'build-aux/config.sub'
-configure.ac:32: installing 'build-aux/install-sh'
-configure.ac:32: installing 'build-aux/missing'
-Makefile.am:12: warning: user variable 'GZIP_ENV' defined here ...
-/usr/local/Cellar/automake/1.16.1/share/automake-1.16/am/distdir.am: ... overrides Automake variable 'GZIP_ENV' defined here
+configure.ac:78: installing 'build-aux/compile'
+configure.ac:38: installing 'build-aux/missing'
 src/Makefile.am: installing 'build-aux/depcomp'
-src/Makefile.am:480: warning: user target '.mm.o' defined here ...
-/usr/local/Cellar/automake/1.16.1/share/automake-1.16/am/depend2.am: ... overrides Automake target '.mm.o' defined here
-parallel-tests: installing 'build-aux/test-driver'
 ```
 
 ```sh
@@ -228,10 +212,14 @@ checking whether C++ compiler accepts -Wextra... yes
 checking whether C++ compiler accepts -Wformat... yes
 checking whether C++ compiler accepts -Wvla... yes
 checking whether C++ compiler accepts -Wformat-security... yes
+checking whether C++ compiler accepts -Wthread-safety-analysis... yes
 checking whether C++ compiler accepts -Wunused-parameter... yes
 checking whether C++ compiler accepts -Wself-assign... yes
 checking whether C++ compiler accepts -Wunused-local-typedef... yes
 checking whether C++ compiler accepts -Wdeprecated-register... yes
+checking whether C++ compiler accepts -Wimplicit-fallthrough... yes
+checking whether C++ compiler accepts -msse4.2... yes
+checking for assembler crc32 support... yes
 checking for port... no
 checking for rsvg-convert... no
 checking for rsvg... no
@@ -308,9 +296,19 @@ checking whether htobe64 is declared... no
 checking whether bswap_16 is declared... no
 checking whether bswap_32 is declared... no
 checking whether bswap_64 is declared... no
+checking whether __builtin_clz is declared... no
+checking whether __builtin_clzl is declared... no
+checking whether __builtin_clzll is declared... no
 checking for MSG_NOSIGNAL... no
+checking for MSG_DONTWAIT... yes
+checking for getmemoryinfo... no
 checking for mallopt M_ARENA_MAX... no
 checking for visibility attribute... yes
+checking for thread_local support... yes
+checking for Linux getrandom syscall... no
+checking for getentropy... no
+checking for getentropy via random.h... yes
+checking for sysctl KERN_ARND... no
 checking for Berkeley DB C++ headers... default
 checking for main in -ldb_cxx-4.8... yes
 checking miniupnpc/miniwget.h usability... yes
@@ -396,14 +394,14 @@ config.status: creating src/Makefile
 config.status: creating doc/man/Makefile
 config.status: creating share/setup.nsi
 config.status: creating share/qt/Info.plist
-config.status: creating src/test/buildenv.py
-config.status: creating qa/pull-tester/tests_config.py
+config.status: creating test/config.ini
 config.status: creating contrib/devtools/split-debug.sh
+config.status: creating doc/Doxyfile
 config.status: creating src/config/bitcoin-config.h
 config.status: executing depfiles commands
 config.status: executing libtool commands
 === configuring in src/univalue (/Users/respepic/Documents/sand/mastering_bitcoin/chap3/bitcoin/src/univalue)
-configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  '--disable-shared' '--with-pic' '--with-bignum=no' '--enable-module-recovery' --cache-file=/dev/null --srcdir=.
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  '--disable-shared' '--with-pic' '--with-bignum=no' '--enable-module-recovery' '--disable-jni' --cache-file=/dev/null --srcdir=.
 checking whether make supports nested variables... yes
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
@@ -514,7 +512,7 @@ config.status: creating univalue-config.h
 config.status: executing depfiles commands
 config.status: executing libtool commands
 === configuring in src/secp256k1 (/Users/respepic/Documents/sand/mastering_bitcoin/chap3/bitcoin/src/secp256k1)
-configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  '--disable-shared' '--with-pic' '--with-bignum=no' '--enable-module-recovery' --cache-file=/dev/null --srcdir=.
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  '--disable-shared' '--with-pic' '--with-bignum=no' '--enable-module-recovery' '--disable-jni' --cache-file=/dev/null --srcdir=.
 checking build system type... x86_64-apple-darwin17.5.0
 checking host system type... x86_64-apple-darwin17.5.0
 checking for a BSD-compatible install... /usr/bin/install -c
@@ -625,10 +623,6 @@ checking for x86_64 assembly availability... yes
 checking for libcrypto... yes
 checking for main in -lcrypto... yes
 checking for EC functions in libcrypto... no
-checking for javac... /usr/bin/javac
-checking symlink for /usr/bin/javac... /System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/javac
-checking jni headers... /System/Library/Frameworks/JavaVM.framework/Versions/Current/Headers
-configure: WARNING: jni headers/dependencies not found. jni support disabled
 checking whether byte ordering is bigendian... no
 configure: Using static precomputation: yes
 configure: Using assembly optimizations: x86_64
@@ -636,6 +630,7 @@ configure: Using field implementation: 64bit
 configure: Using bignum implementation: no
 configure: Using scalar implementation: 64bit
 configure: Using endomorphism optimizations: no
+configure: Building for coverage analysis: no
 configure: Building ECDH module: no
 configure: Building ECDSA pubkey recovery module: yes
 configure: Using jni: no
@@ -656,6 +651,7 @@ Options used to compile and link:
   with test     = yes
   with bench    = yes
   with upnp     = yes
+  use asm       = yes
   debug enabled = no
   werror        = no
 
@@ -666,15 +662,18 @@ Options used to compile and link:
   CFLAGS        = -g -O2
   CPPFLAGS      =  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/local/opt/berkeley-db@4/include -DMAC_OSX
   CXX           = g++ -std=c++11
-  CXXFLAGS      = -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter -Wno-self-assign -Wno-unused-local-typedef -Wno-deprecated-register
+  CXXFLAGS      = -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wthread-safety-analysis -Wno-unused-parameter -Wno-self-assign -Wno-unused-local-typedef -Wno-deprecated-register -Wno-implicit-fallthrough
   LDFLAGS       =  -Wl,-headerpad_max_install_names -Wl,-dead_strip
-  ```
+  ARFLAGS       = cr
+```
 
+```sh
+❯ make
+長いので省略
+```
 
-
-
-
-
+```sh
+```
 
 
 
