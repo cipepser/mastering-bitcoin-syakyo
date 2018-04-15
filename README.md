@@ -863,6 +863,103 @@ Mastering Bitcoinにある`getinfo`は`v0.16.0`で廃止になっている。
 }
 ```
 
+walletのセットアップ
+
+```sh
+❯ bitcoin-cli encryptwallet <PASSPHRASE>
+wallet encrypted; Bitcoin server stopping, restart to run with encrypted wallet. The keypool has been flushed and a new HD seed was generated (if you are using HD). You need to make a new backup.
+```
+
+メッセージの通り、`bitcoind -prune=550`で再起動してから以下を確認。
+
+```sh
+❯ bitcoin-cli getwalletinfo
+{
+  "walletname": "wallet.dat",
+  "walletversion": 159900,
+  "balance": 0.00000000,
+  "unconfirmed_balance": 0.00000000,
+  "immature_balance": 0.00000000,
+  "txcount": 0,
+  "keypoololdest": 1523795208,
+  "keypoolsize": 1000,
+  "keypoolsize_hd_internal": 1000,
+  "unlocked_until": 0,
+  "paytxfee": 0.00000000,
+  "hdmasterkeyid": "省略(秘匿の必要あるか不明)"
+}
+```
+
+`unlocked_until`が`0`になっている。この値がメモリ上にPASSPHRASEを保持する時間。
+以下のように保持する秒数を指定できる。
+
+```sh
+❯ bitcoin-cli walletpassphrase YpCqGcVnUCJa3Dm68BVTcFGTPtizsmqF 360
+❯ bitcoin-cli getwalletinfo
+{
+  "walletname": "wallet.dat",
+  "walletversion": 159900,
+  "balance": 0.00000000,
+  "unconfirmed_balance": 0.00000000,
+  "immature_balance": 0.00000000,
+  "txcount": 0,
+  "keypoololdest": 1523795208,
+  "keypoolsize": 1000,
+  "keypoolsize_hd_internal": 1000,
+  "unlocked_until": 1523795787,
+  "paytxfee": 0.00000000,
+  "hdmasterkeyid": "省略(秘匿の必要あるか不明)"
+}
+```
+
+コマンド打つのがめんどくさいのでalias貼る。
+
+```sh
+alias bitd='bitcoind'
+alias bitc='bitcoin-cli'
+```
+
+バックアップを作る。
+
+```sh
+❯ bitc backupwallet ./wallet.backup
+```
+
+インポートはpruneモードだとできないらしい。
+
+```sh
+❯ bitc importwallet ./wallet.backup
+error code: -4
+error message:
+Importing wallets is disabled in pruned mode
+```
+
+ダンプはできる。
+
+```sh
+❯ bitc dumpwallet wallet.txt
+❯ ls
+wallet.backup wallet.txt
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
