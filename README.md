@@ -721,13 +721,147 @@ make[2]: Nothing to be done for `install-exec-am'.
 ❯ bitcoind -prune=550
 ```
 
+上記を起動した状態でJSON-RPC APIを叩く。
+Mastering Bitcoinにある`getinfo`は`v0.16.0`で廃止になっている。
+新コマンドは以下。
 
+```sh
+- getblockchaininfo: blocks, difficulty, chain
+- getnetworkinfo: version, protocolversion, timeoffset, connections, proxy, relayfee, warnings
+- getwalletinfo: balance, keypoololdest, keypoolsize, paytxfee, unlocked_until, walletversion
+```
 
+```sh
+❯ bitcoin-cli getblockchaininfo
+{
+  "chain": "main",
+  "blocks": 518319,
+  "headers": 518319,
+  "bestblockhash": "00000000000000000047a17be67fcd7f79432a9294d509ae168340c524ba1faf",
+  "difficulty": 3839316899029.672,
+  "mediantime": 1523791727,
+  "verificationprogress": 0.9999984999247827,
+  "initialblockdownload": false,
+  "chainwork": "00000000000000000000000000000000000000000181c1c4478f4d5623bf5810",
+  "size_on_disk": 523670429,
+  "pruned": true,
+  "pruneheight": 517751,
+  "automatic_pruning": true,
+  "prune_target_size": 576716800,
+  "softforks": [
+    {
+      "id": "bip34",
+      "version": 2,
+      "reject": {
+        "status": true
+      }
+    },
+    {
+      "id": "bip66",
+      "version": 3,
+      "reject": {
+        "status": true
+      }
+    },
+    {
+      "id": "bip65",
+      "version": 4,
+      "reject": {
+        "status": true
+      }
+    }
+  ],
+  "bip9_softforks": {
+    "csv": {
+      "status": "active",
+      "startTime": 1462060800,
+      "timeout": 1493596800,
+      "since": 419328
+    },
+    "segwit": {
+      "status": "active",
+      "startTime": 1479168000,
+      "timeout": 1510704000,
+      "since": 481824
+    }
+  },
+  "warnings": ""
+}
+```
 
+```sh
+❯ bitcoin-cli getnetworkinfo
+{
+  "version": 160000,
+  "subversion": "/Satoshi:0.16.0/",
+  "protocolversion": 70015,
+  "localservices": "000000000000040c",
+  "localrelay": true,
+  "timeoffset": -2,
+  "networkactive": true,
+  "connections": 8,
+  "networks": [
+    {
+      "name": "ipv4",
+      "limited": false,
+      "reachable": true,
+      "proxy": "",
+      "proxy_randomize_credentials": false
+    },
+    {
+      "name": "ipv6",
+      "limited": false,
+      "reachable": true,
+      "proxy": "",
+      "proxy_randomize_credentials": false
+    },
+    {
+      "name": "onion",
+      "limited": true,
+      "reachable": false,
+      "proxy": "",
+      "proxy_randomize_credentials": false
+    }
+  ],
+  "relayfee": 0.00001000,
+  "incrementalfee": 0.00001000,
+  "localaddresses": [
+    {
+      "address": "省略(IPv6アドレス)",
+      "port": 8333,
+      "score": 1
+    },
+    {
+      "address": "省略(IPv6アドレス)",
+      "port": 8333,
+      "score": 1
+    },
+    {
+      "address": "省略(IPv6アドレス)",
+      "port": 8333,
+      "score": 1
+    }
+  ],
+  "warnings": ""
+}
+```
 
-
-
-
+```sh
+❯ bitcoin-cli getwalletinfo
+{
+  "walletname": "wallet.dat",
+  "walletversion": 159900,
+  "balance": 0.00000000,
+  "unconfirmed_balance": 0.00000000,
+  "immature_balance": 0.00000000,
+  "txcount": 0,
+  "keypoololdest": 1523680591,
+  "keypoolsize": 1000,
+  "keypoolsize_hd_internal": 1000,
+  "paytxfee": 0.00000000,
+  "hdmasterkeyid": "省略(秘匿の必要あるか不明)"
+}
+```
 
 
 
