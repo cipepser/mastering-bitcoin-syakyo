@@ -673,24 +673,53 @@ Options used to compile and link:
 ```
 
 ```sh
+❯ sudo make install
+Making install in src
+ ../build-aux/install-sh -c -d '/usr/local/lib'
+ /bin/sh ../libtool   --mode=install /usr/bin/install -c   libbitcoinconsensus.la '/usr/local/lib'
+libtool: install: /usr/bin/install -c .libs/libbitcoinconsensus.0.dylib /usr/local/lib/libbitcoinconsensus.0.dylib
+libtool: install: (cd /usr/local/lib && { ln -s -f libbitcoinconsensus.0.dylib libbitcoinconsensus.dylib || { rm -f libbitcoinconsensus.dylib && ln -s libbitcoinconsensus.0.dylib libbitcoinconsensus.dylib; }; })
+libtool: install: /usr/bin/install -c .libs/libbitcoinconsensus.lai /usr/local/lib/libbitcoinconsensus.la
+libtool: install: /usr/bin/install -c .libs/libbitcoinconsensus.a /usr/local/lib/libbitcoinconsensus.a
+libtool: install: chmod 644 /usr/local/lib/libbitcoinconsensus.a
+libtool: install: /usr/bin/ranlib /usr/local/lib/libbitcoinconsensus.a
+ ../build-aux/install-sh -c -d '/usr/local/bin'
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c bitcoind bitcoin-cli bitcoin-tx test/test_bitcoin bench/bench_bitcoin qt/bitcoin-qt qt/test/test_bitcoin-qt '/usr/local/bin'
+libtool: install: /usr/bin/install -c bitcoind /usr/local/bin/bitcoind
+libtool: install: /usr/bin/install -c bitcoin-cli /usr/local/bin/bitcoin-cli
+libtool: install: /usr/bin/install -c bitcoin-tx /usr/local/bin/bitcoin-tx
+libtool: install: /usr/bin/install -c test/test_bitcoin /usr/local/bin/test_bitcoin
+libtool: install: /usr/bin/install -c bench/bench_bitcoin /usr/local/bin/bench_bitcoin
+libtool: install: /usr/bin/install -c qt/bitcoin-qt /usr/local/bin/bitcoin-qt
+libtool: install: /usr/bin/install -c qt/test/test_bitcoin-qt /usr/local/bin/test_bitcoin-qt
+ ../build-aux/install-sh -c -d '/usr/local/include'
+ /usr/bin/install -c -m 644 script/bitcoinconsensus.h '/usr/local/include'
+Making install in doc/man
+make[2]: Nothing to be done for `install-exec-am'.
+ ../../build-aux/install-sh -c -d '/usr/local/share/man/man1'
+ /usr/bin/install -c -m 644 bitcoind.1 bitcoin-qt.1 bitcoin-cli.1 bitcoin-tx.1 '/usr/local/share/man/man1'
+make[2]: Nothing to be done for `install-exec-am'.
+ build-aux/install-sh -c -d '/usr/local/lib/pkgconfig'
+ /usr/bin/install -c -m 644 libbitcoinconsensus.pc '/usr/local/lib
 ```
 
+インストールできたことを確認。
 
+```sh
+❯ which bitcoind
+/usr/local/bin/bitcoind
 
+❯ which bitcoin-cli
+/usr/local/bin/bitcoin-cli
+```
 
+`prune`オプションを有効にして、ストレージ容量を節約する。
+ただし、一度フルノードになるので時間と通信量は掛かる。
+2018/04/15で、1d 4h 55m 12sで168GB程度が実績。
 
-
-
-
-
-
-
-
-
-
-
-
-
+```sh
+❯ bitcoind -prune=550
+```
 
 
 
