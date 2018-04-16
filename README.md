@@ -942,19 +942,36 @@ Importing wallets is disabled in pruned mode
 wallet.backup wallet.txt
 ```
 
+walletを作ってみる
 
+```sh
+❯ bitc getnewaddress
+3Arphg8KpPdHYny9LsyZQRchMzTwQKzJvK
+```
 
+受け取った量を確認（送ってないので0.00000000)。最後の引数`0`を省略すると`minconf`回承認されないと残高が反映されない。
 
+```sh
+❯ bitc getreceivedbyaddress 3Arphg8KpPdHYny9LsyZQRchMzTwQKzJvK 0
+0.00000000
+```
 
+txの確認
 
+```sh
+❯ bitc listtransactions
+[
+]
+```
 
+アドレスの確認
 
-
-
-
-
-
-
+```sh
+❯ bitc getaddressesbyaccount ""
+[
+  "3Arphg8KpPdHYny9LsyZQRchMzTwQKzJvK"
+]
+```
 
 
 
