@@ -964,7 +964,7 @@ txの確認
 ]
 ```
 
-アドレスの確認
+wallet内のアドレスの確認
 
 ```sh
 ❯ bitc getaddressesbyaccount ""
@@ -973,6 +973,26 @@ txの確認
 ]
 ```
 
+wallet内の残高を確認
+
+```sh
+❯ bitc getbalance
+0.00000000
+```
+
+txの探索。実行時点の適当なtxをbitcon exploreで拾ってきて確認したけど、wallet内のtxじゃないとダメっぽい。  
+→`txindex`オプションを有効にしていないとwallet内のtxしか見れないらしい。
+設定は`bitcoin.conf`に書く。現行バージョンでのファイルパスは[ここ](https://en.bitcoin.it/wiki/Running_Bitcoin#Bitcoin.conf_Configuration_File)にある。
+でも`prune`オプションと共存できないらしい。
+
+```sh
+❯ bitc gettransaction d5e6722c3bcc1e4e08fd41302a0f0ca429fbe24e6836226382219e4a17477aaa
+error code: -5
+error message:
+Invalid or non-wallet transaction id
+```
+
+`getrawtransaction`でhex形式のtxが見れ、`decoderawtransaction`すれば、json形式で見れる。
 
 
 
@@ -988,3 +1008,31 @@ txの確認
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## References
+* [bitcoin wiki](https://en.bitcoin.it/wiki/Running_Bitcoin#Bitcoin.conf_Configuration_File)
