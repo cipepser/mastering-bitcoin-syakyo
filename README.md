@@ -995,11 +995,47 @@ Invalid or non-wallet transaction id
 `getrawtransaction`でhex形式のtxが見れ、`decoderawtransaction`すれば、json形式で見れる。
 
 
+ブロック情報を持ってくる。
+今回も適当にtxidをbitcoin exploreから持ってきた。
+ちなみに`prune`モードなので、古いやつは表示できない可能性が高い。
 
+```sh
+❯ bitc getblock 00000000000000000032e49cc0d9605f921d893b75559f49eed107e772754dd5
+error code: -1
+error message:
+Block not available (pruned data)
+```
 
+直近のブロックは持っているので、表示できるブロックを持ってくると以下のようになる。
 
-
-
+```sh
+❯ bitc getblock 00000000000000000029fffaecdb8e360da5434a2cdb2570fc66f93c6455b093
+{
+  "hash": "00000000000000000029fffaecdb8e360da5434a2cdb2570fc66f93c6455b093",
+  "confirmations": 1,
+  "strippedsize": 89389,
+  "size": 100647,
+  "weight": 368814,
+  "height": 518549,
+  "version": 536870912,
+  "versionHex": "20000000",
+  "merkleroot": "7244a0db792d38037224457ef10d296ca102eecaf64a569857e8b018e959386c",
+  "tx": [
+    "5b8b61a0f0ca0c5bd92e5e3f5e59d4baf0ad2d4bb11b0918140bedeb30f48640",
+    "d8d2eda6df5a0f7d80f905402aab288004a8fb5ba62537dd98a1f78e77135168",
+    ~中略~
+    "dda9c54e8fe437065b3bf8bf8c916c169f570972ecb41f918d0746ce11f8a754",
+    "65f9e3f4af978a2657c00447891852721c2d5f48c14a7a16212040b207d4760b"
+  ],
+  "time": 1523927077,
+  "mediantime": 1523926513,
+  "nonce": 237932355,
+  "bits": "1749500d",
+  "difficulty": 3839316899029.672,
+  "chainwork": "00000000000000000000000000000000000000000184e4e6dc485a07b68e9d1e",
+  "previousblockhash": "0000000000000000000667558dda060951bb5e137acbd9a0ceda592600e32e7e"
+}
+```
 
 
 
