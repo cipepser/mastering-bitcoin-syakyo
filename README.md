@@ -949,6 +949,13 @@ walletを作ってみる
 3Arphg8KpPdHYny9LsyZQRchMzTwQKzJvK
 ```
 
+秘密鍵は`dumpprivkey`で見れる
+
+```sh
+❯ bitc dumpprivkey 3Arphg8KpPdHYny9LsyZQRchMzTwQKzJvK
+// private keyが表示される
+```
+
 受け取った量を確認（送ってないので0.00000000)。最後の引数`0`を省略すると`minconf`回承認されないと残高が反映されない。
 
 ```sh
@@ -1094,27 +1101,6 @@ txを作る時は以下のようにする。見やすいように改行入れて
 ```
 もう一度`decoderawtransaction`すれば、`scriptSig`に署名が入ったことがわかる。
 これを`sendtransaction`すればbitcoin networkに送れる。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## References
 * [bitcoin wiki](https://en.bitcoin.it/wiki/Running_Bitcoin#Bitcoin.conf_Configuration_File)
