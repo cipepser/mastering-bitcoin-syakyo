@@ -1037,17 +1037,63 @@ Block not available (pruned data)
 }
 ```
 
+未使用のoutputを表示（何も所有していないので出ない）
 
+```sh
+❯ bitc listunspent
+[
+]
+```
 
+特定のtxのoutputを見る。`txid`と`vout`インデックスが必要。
 
+```sh
+❯ bitc gettxout 5b8b61a0f0ca0c5bd92e5e3f5e59d4baf0ad2d4bb11b0918140bedeb30f48640 0
+{
+  "bestblock": "00000000000000000039dabd8ef85b2712c35b695b8ef32985692d0030f902f5",
+  "confirmations": 2,
+  "value": 12.50906378,
+  "scriptPubKey": {
+    "asm": "OP_DUP OP_HASH160 78ce48f88c94df3762da89dc8498205373a8ce6f OP_EQUALVERIFY OP_CHECKSIG",
+    "hex": "76a91478ce48f88c94df3762da89dc8498205373a8ce6f88ac",
+    "reqSigs": 1,
+    "type": "pubkeyhash",
+    "addresses": [
+      "1C1mCxRukix1KfegAY5zQQJV7samAciZpv"
+    ]
+  },
+  "coinbase": true
+}
+```
 
+txを作る時は以下のようにする。見やすいように改行入れてる。
 
+```sh
+❯ bitc createrawtransaction `[{
+  "txid": "<0.05の未使用outputがあるtxid>"
+  "vout": 0
+}]`
+`{
+  "<送金先addr>": 0.025
+  "<お釣りを受け取るaddr>": 0.0245
+}`
 
+// hexのtxが表示される
+```
 
+差額の`0.005`がminerへ支払う手数料。
+生成されるのはhexなので`decoderawtransaction`すればjsonで読める。
+実際に自分では作っていないけど、空の`scriptSig`があることがわかる。これはまだ署名していないことを意味する。
+署名するには以下を実行する。
 
+```sh
+❯ bitc walletpassphrase <PASSPHRASE> 360
+❯ bitc signrawtransaction <hex形式のtx>
 
-
-
+// hexのtxが表示される
+```
+もう一度`decoderawtransaction`すれば、`scriptSig`に署名が入ったことがわかる。
+これを`sendtransaction`すればbitcoin networkに送れる。
 
 
 
