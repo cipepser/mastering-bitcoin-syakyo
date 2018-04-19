@@ -34,5 +34,15 @@ wrapper
 }
 ```
 
+逆にエンコードするときは以下。`128`はversion prefix
+
+```sh
+❯ ./bx base58check-encode <hex 秘密鍵> --version 128
+// 圧縮WIF形式の秘密鍵が表示される
+```
+
+
+
+
 ## References
 * [libbitcoin-explorer](https://github.com/libbitcoin/libbitcoin-explorer/wiki/)
