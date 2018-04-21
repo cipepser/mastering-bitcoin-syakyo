@@ -172,6 +172,50 @@ EC point:  (10032923445588616478909904694167539634803895502798649618725936248071
 BTC public key:  03ddd055976015d76ddb7994fcec3f24f2e3de21903236ab3e99c200f5d8258818
 ```
 
+## bxでHD walletを作る
+
+BIP0032決定性鍵を作る
+
+```sh
+❯ ./bx seed | ./bx hd-new > m
+❯ cat m
+xprv9s21ZrQH143K4avJqxhhXTDLSYnn83uUt1nfGd6DbmFFvu9afM7VLdFatsydQfiDUq1vees9ztatRweqxm5Zv6yjjwhtvRnqBZJKqaN4x3x
+```
+
+`M/0`のextended public key。prefixが`xpub`になる。
+
+```sh
+❯ cat m | ./bx hd-public
+xpub68L1p4Cv4b8wL2RtCyLDqwgLJKm1uzdNGhNoLJKJRfRQyyhUFqRLTnHum7whVdbD2wSNJCm6gxFrgsuYn75S79zz2VeEELNKrnbc74k6e8S
+```
+
+`M/0`のextended private key。prefixが`xpri`になる。
+
+```sh
+❯ cat m | ./bx hd-private
+xprv9uLfQYg2EDae7YMR6woDUojbkHvXWXuWuUTCXuugsKtS7BNKiJ75uyyRupM8mbZfhVgo596Jfh7TwxeLkNLinqP9V9LvEYs8GcWXCiwzmcN
+```
+
+`M/0`の秘密鍵をWIF形式で表示。マスタリングビットコインそのままだとできないので、一度ecを経由する必要がある。
+
+```sh
+❯ cat m | ./bx hd-private | ./bx hd-to-ec | ./bx ec-to-wif
+KzYZ4REnkAemqvHKM1HoCAQzJ3Q2ATJf46hdXVvjfKZniN2RWLsR
+```
+
+公開鍵からアドレスを作成。これもecを経由させる。
+
+```sh
+❯ cat m | ./bx hd-public | ./bx hd-to-ec |./bx ec-to-address
+125s91tARgqtSi1P1GiQ4eCyMfHbpoHXHV
+```
+
+`M/0/12'/4`となる孫秘密鍵を作る`'`は`--hard`で指定する。
+
+```sh
+❯ cat m | ./bx hd-private | ./bx hd-private --index 12 --hard | ./bx hd-private --index 4
+xprv9zASRoYi7nVr5eq3Zs152bmLvJeizsVJAbsxKUJXoa3U97RBiSC2PfaWMGi7ap9aUb8n8sDKQh9phEkZ3eTWE9oWVhKipdQmsWY14ePUQ2n
+```
 
 
 ## References
