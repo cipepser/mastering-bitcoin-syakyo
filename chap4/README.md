@@ -217,6 +217,14 @@ KzYZ4REnkAemqvHKM1HoCAQzJ3Q2ATJf46hdXVvjfKZniN2RWLsR
 xprv9zASRoYi7nVr5eq3Zs152bmLvJeizsVJAbsxKUJXoa3U97RBiSC2PfaWMGi7ap9aUb8n8sDKQh9phEkZ3eTWE9oWVhKipdQmsWY14ePUQ2n
 ```
 
+## P2SH(Pay-to-Script Hash)
+
+```sh
+❯ echo dup hash160 \[89abcdefabbaabbaabbaabbaabbaabbaabbaabba\] equalverify checksig > script
+❯ ./bx script-encode < script | ./bx sha256 | ./bx ripemd160 | ./bx base58check-encode --version 5
+3F6i6kwkevjR7AsAd4te2YB2zZyASEm1HM
+```
+
 
 ## References
 * [libbitcoin-explorer](https://github.com/libbitcoin/libbitcoin-explorer/wiki/)
