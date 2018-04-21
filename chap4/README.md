@@ -225,6 +225,29 @@ xprv9zASRoYi7nVr5eq3Zs152bmLvJeizsVJAbsxKUJXoa3U97RBiSC2PfaWMGi7ap9aUb8n8sDKQh9p
 3F6i6kwkevjR7AsAd4te2YB2zZyASEm1HM
 ```
 
+## UTXO
+
+addressを指定してUTXOを確認する
+
+```python
+import json
+import requests
+
+address = '1Dorian4RoXcnBv9hnQ4Y2C1an6NJ4UrjX'
+
+resp = requests.get('https://blockchain.info/unspent?active=%s' % address)
+utxo_set = json.loads(resp.text)["unspent_outputs"]
+
+for utxo in utxo_set:
+    print "%s:%d - %ld Satoshis" % (utxo['tx_hash'], utxo['tx_output_n'], utxo['value'])
+```
+
+実行結果
+
+```sh
+dbb3853afdb127cb7555bf44a033fa69b57335720132b8c016239ca80e4e570b:0 - 101010 Satoshis
+```
+
 
 ## References
 * [libbitcoin-explorer](https://github.com/libbitcoin/libbitcoin-explorer/wiki/)
