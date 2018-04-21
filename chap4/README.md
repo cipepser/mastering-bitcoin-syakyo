@@ -42,6 +42,11 @@ wrapper
 ```
 
 pybitcointoolsを使って秘密鍵の生成からBitcoin Addressの作成まで。
+先に以下をインストール。
+
+```sh
+❯ pip install bitcoin
+```
 
 ```python
 import bitcoin
