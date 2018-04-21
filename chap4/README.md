@@ -1,5 +1,7 @@
 # 第4章 鍵、アドレス、ウォレット
 
+## libbitcoin
+
 libbitcoin-explorerの[DLページ](https://github.com/libbitcoin/libbitcoin-explorer/wiki/Download-BX)からOSX版を落とす。
 パスを通してもいいけど、いったんchap4の中だけで触る前提で進める。
 
@@ -40,6 +42,8 @@ wrapper
 ❯ ./bx base58check-encode <hex 秘密鍵> --version 128
 // 圧縮WIF形式の秘密鍵が表示される
 ```
+
+## pybitcointools
 
 pybitcointoolsを使って秘密鍵の生成からBitcoin Addressの作成まで。
 先に以下をインストール。
@@ -105,6 +109,8 @@ Bitcoin Address (b58check) is:  16LvcQx1xbESn8uquG26TWhmSUEptcG8Fr
 Compressed Bitcoin Address (b58check) is:  1JZuSgTijdEL6RK1tUkmksxrbz61MmFV8k
 ```
 
+## 楕円曲線デモ
+
 次に[Secp256k1](https://en.bitcoin.it/wiki/Secp256k1)の楕円曲線で遊んでみる。
 パラメータも上記リンクにある(コピペできる)。
 
@@ -165,6 +171,7 @@ Secret:  56869471220463491038010591534043434331348000118931540949271452746364952
 EC point:  (100329234455886164789099046941675396348038955027986496187259362480712577288216,97057135012951096800461757946404241174912348190292225552012224403248824367829)
 BTC public key:  03ddd055976015d76ddb7994fcec3f24f2e3de21903236ab3e99c200f5d8258818
 ```
+
 
 
 ## References
